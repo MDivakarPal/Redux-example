@@ -1,25 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import DecorateText from './DecorateText'
+import {connect} from 'react-redux'
+function App({state,disptach}) {
+  console.log(disptach);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <DecorateText>
+          <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        </DecorateText>
+        <DecorateText>
+          <button onClick={()=>disptach({type:'toggle_size'})}>Change Size</button>
+        </DecorateText>
+        <DecorateText>
+          <button onClick={()=>disptach({type:'toggle_color'})}>Change Color</button>
+        </DecorateText>
+        <DecorateText>
+          <button onClick={()=>disptach({type:'toogle_theme'})}>Change Theme Color</button>
+        </DecorateText>
       </header>
     </div>
   );
 }
+const mapStateToProps=(state)=>{
+  console.log({state});
+  return {state};
+}
 
-export default App;
+const mapStateToDispatch=(disptach)=>{
+  console.log(disptach)
+  return {disptach};
+}
+export default connect(mapStateToProps,mapStateToDispatch)(App);
